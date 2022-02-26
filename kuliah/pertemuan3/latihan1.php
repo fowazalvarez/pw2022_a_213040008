@@ -12,6 +12,8 @@ for($i = 1; $i <= 10; $i++) {
 $x = 10;
 if( $x > 5) {
     echo "Bilangan $x lebih besar dari 5";
+} else {
+    echo "Bilangan $x lebih kecil dari 5";
 }
 
 ?>
