@@ -87,3 +87,17 @@ $x = 10;
 echo ++$x;
 echo "<br>";
 echo $x++;
+echo "<hr>";
+
+// Assignment
+// =, +=, -=, *=, /=. %=, .=
+$nama = "Fowaz";
+$nama .= " ";
+$nama .= "Amran";
+echo $nama;
+echo "<hr>";
+
+// Logika
+// &&, ||, !
+$x = 10;
+var_dump($x < 20 && $x % 2 == 0);
