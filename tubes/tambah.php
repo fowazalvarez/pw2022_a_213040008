@@ -27,7 +27,7 @@ require 'functions.php';
         <!-- Memasukan Data -->
         <div class="card">
             <div class="card-header">
-                Create / Edit Data
+                Tambah Data Siswa
             </div>
             <div class="card-body">
                 <?php 

@@ -5,6 +5,8 @@ if(!$koneksi){
 //Mengecek Koneksi
   die("Tidak bisa Terkoneksi");
 }
+
+// Menambah Data
 $nama     = "";
 $email    = "";
 $program  = "";
@@ -19,7 +21,7 @@ if(isset($_POST['simpan'])){
     $program    = $_POST['program'];
     $alamat     = $_POST['alamat'];
     $gambar     = $_POST['gambar'];
-  
+// Jika Data berhasil atau tidak
     if($nama && $email && $program && $alamat && $gambar) {
       $sql1       = "insert into siswa(nama,email,program,alamat,gambar) values ('$nama','$email','$program','$alamat','$gambar')";
       $result     = mysqli_query($koneksi,$sql1);
