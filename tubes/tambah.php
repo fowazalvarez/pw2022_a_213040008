@@ -52,17 +52,20 @@ require 'functions.php';
                     <!-- nama -->
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama :</label>
-                        <input type="text" class="form-control" id="nama" name="nama" value="<?php echo $nama ?>">
+                        <input type="text" class="form-control" id="nama" name="nama" required autocomplete="off"
+                            value="<?php echo $nama ?>">
                     </div>
                     <!-- email -->
                     <div class="mb-3">
                         <label for="email" class="form-label">Email :</label>
-                        <input type="email" class="form-control" id="email" name="email" value="<?php echo $email ?>">
+                        <input type="email" class="form-control" id="email" name="email" required autocomplete="off"
+                            value="<?php echo $email ?>">
                     </div>
                     <!-- alamat -->
                     <div class="mb-3">
                         <label for="alamat" class="form-label">Alamat :</label>
-                        <input type="text" class="form-control" id="alamat" name="alamat" value="<?php echo $alamat ?>">
+                        <input type="text" class="form-control" id="alamat" name="alamat" required autocomplete="off"
+                            value="<?php echo $alamat ?>">
                     </div>
                     <!-- Program -->
                     <div class="mb-3">

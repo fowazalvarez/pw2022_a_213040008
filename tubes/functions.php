@@ -7,21 +7,25 @@ if(!$koneksi){
 }
 
 // Menambah Data
-$nama     = "";
-$email    = "";
-$program  = "";
-$alamat   = "";
-$gambar   = "";
-$sukses   = "";
-$error    = "";
 
+function tambah($data) {
+    global $koneksi
+
+$nama     = htmlspecialchars"";
+$email    = htmlspecialchars"";
+$program  = htmlspecialchars"";
+$alamat   = htmlspecialchars"";
+$gambar   = htmlspecialchars"";
+$sukses   = htmlspecialchars"";
+$error    = htmlspecialchars"";
+// Apakah tombol sudah ditekan atau belum
 if(isset($_POST['simpan'])){
+// Jika Data berhasil atau tidak
     $nama       = $_POST['nama'];
     $email      = $_POST['email'];
     $program    = $_POST['program'];
     $alamat     = $_POST['alamat'];
     $gambar     = $_POST['gambar'];
-// Jika Data berhasil atau tidak
     if($nama && $email && $program && $alamat && $gambar) {
       $sql1       = "insert into siswa(nama,email,program,alamat,gambar) values ('$nama','$email','$program','$alamat','$gambar')";
       $result     = mysqli_query($koneksi,$sql1);
