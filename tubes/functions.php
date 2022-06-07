@@ -1,42 +1,130 @@
-<?php
-// Koneksi ke Database
-$koneksi = mysqli_connect("localhost", "root", "", "pw2022_a_213040008");
-if(!$koneksi){ 
-//Mengecek Koneksi
-  die("Tidak bisa Terkoneksi");
+<?php 
+
+
+function koneksi() {
+    $conn = mysqli_connect("localhost", "root", "", "pw2022_a_213040008") or die('koneksi gagal !');
+
+    return $conn;
 }
 
-// Menambah Data
+function query($query) {
+    $conn = koneksi();
+    $result = mysqli_query($conn, $query)or die(mysqli_error($conn));
+
+
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+    $rows[] = $row;
+ } 
+ return $rows;
+}
+
 
 function tambah($data) {
-    global $koneksi
-
-$nama     = htmlspecialchars"";
-$email    = htmlspecialchars"";
-$program  = htmlspecialchars"";
-$alamat   = htmlspecialchars"";
-$gambar   = htmlspecialchars"";
-$sukses   = htmlspecialchars"";
-$error    = htmlspecialchars"";
-// Apakah tombol sudah ditekan atau belum
-if(isset($_POST['simpan'])){
-// Jika Data berhasil atau tidak
-    $nama       = $_POST['nama'];
-    $email      = $_POST['email'];
-    $program    = $_POST['program'];
-    $alamat     = $_POST['alamat'];
-    $gambar     = $_POST['gambar'];
-    if($nama && $email && $program && $alamat && $gambar) {
-      $sql1       = "insert into siswa(nama,email,program,alamat,gambar) values ('$nama','$email','$program','$alamat','$gambar')";
-      $result     = mysqli_query($koneksi,$sql1);
-      if($result){
-        $sukses   = "Berhasil Memasukkan Data Baru";
-      }else{
-        $error    = "Gagal Memasukkan Data";
-      }
-    }else{
-      $error = "Silahkan Masukan Semua Data";
+    $conn = koneksi();
+    
+    // cek apkaah user tidak memilih gambar
+    if(($_FILES["gambar"]["error"]) === 4) {
+        // Beri gambar default
+        $gambar = 'noimg.jpg';
+    }else {
+        // lakukan fungsi upload
+        $gambar = upload();
+        // cek jika upload gagal
+        if (!$gambar) {
+            return false;
+        }
     }
-  }
+
+    $nama = htmlspecialchars($data["nama"]);
+    $email = htmlspecialchars($data["email"]);
+    $alamat = htmlspecialchars($data["alamat"]);
+    $program = htmlspecialchars($data["program"]);
+    // $gambar = htmlspecialchars($data["gambar"]);
+
+    $query = "INSERT INTO siswa 
+                VALUES
+                (null, '$nama', '$email', '$alamat', '$program', '$gambar')";
+
+    mysqli_query($conn, $query) or die (mysqli_error($conn));
+
+    return mysqli_affected_rows($conn);
+}
+
+function hapus($id) {
+    $conn = koneksi();
+
+    // Query berdasarkan id
+    $swa = query("SELECT * FROM siswa WHERE id = $id")[0];
+    // Cek jika gambar default
+    if($swa["gambar"] !== 'noimg.jpg') {
+    // Hapus Gambar
+    unlink('img/' . $swa["gambar"]);
+    }
+
+    mysqli_query($conn, "DELETE FROM siswa WHERE id = $id") or die(mysqli_error($conn));
+
+    return  mysqli_affected_rows($conn);
+}
+
+// Tambah/Update Data
+function ubah($data) {
+    $conn = koneksi();
+
+    $id = $data["id"];
+    $nama = htmlspecialchars($data["nama"]);
+    $email = htmlspecialchars($data["email"]);
+    $alamat = htmlspecialchars($data["alamat"]);
+    $program = htmlspecialchars($data["program"]);
+    $gambar = htmlspecialchars($data["gambar"]);
+
+    $query = "UPDATE siswa SET
+                nama = '$nama',
+                email = '$email',
+                alamat = '$alamat',
+                program = '$program',
+                gambar = '$gambar'
+                WHERE id = $id
+    
+    ";
+
+    mysqli_query($conn, $query) or die (mysqli_error($conn));
+
+    return mysqli_affected_rows($conn);
+}
+
+// Upload Gambar
+
+function upload() {
+// Siapkan gambar
+
+$filename = $_FILES["gambar"]["name"];
+$filetmpname = $_FILES["gambar"]["tmp_name"];
+$filesize = $_FILES["gambar"]["size"];
+$filetype = pathinfo($filename, PATHINFO_EXTENSION);
+$allowedtype = ['jpg', 'jpeg', 'png'];
+
+// cek apakah file bukan gambar 
+if(!in_array($filetype, $allowedtype)) {
+    echo "<script>
+          alert('Upload gambar yang bener y');
+         </script>";
+    return false;
+}
+// cek jika gambar terlalu besar
+if($filesize > 1000000) {
+    echo "<script>
+    alert('Kegedean size gambarnya ygy');
+   </script>";
+return false;
+}
+// PROSES UPLOAD GAMBAR
+$newfilename = uniqid() . $filename;
+
+move_uploaded_file($filetmpname, 'img/' . $newfilename);
+return $newfilename; 
+
+
+}
 
 ?>
