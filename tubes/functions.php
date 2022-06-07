@@ -96,8 +96,8 @@ function ubah($data) {
 // Upload Gambar
 
 function upload() {
-// Siapkan gambar
 
+// Siapkan gambar
 $filename = $_FILES["gambar"]["name"];
 $filetmpname = $_FILES["gambar"]["tmp_name"];
 $filesize = $_FILES["gambar"]["size"];
@@ -107,14 +107,14 @@ $allowedtype = ['jpg', 'jpeg', 'png'];
 // cek apakah file bukan gambar 
 if(!in_array($filetype, $allowedtype)) {
     echo "<script>
-          alert('Upload gambar yang bener y');
+          alert('File tidak sesuai');
          </script>";
     return false;
 }
 // cek jika gambar terlalu besar
 if($filesize > 1000000) {
     echo "<script>
-    alert('Kegedean size gambarnya ygy');
+    alert('Size terlalu besar');
    </script>";
 return false;
 }
@@ -124,6 +124,43 @@ $newfilename = uniqid() . $filename;
 move_uploaded_file($filetmpname, 'img/' . $newfilename);
 return $newfilename; 
 
+
+}
+
+// Registrasi
+function registrasi($data) {
+    $conn = koneksi();
+
+    $username = strtolower(stripslashes($data["username"]));
+    $password = mysqli_real_escape_string($conn, $data["password"]);
+    $password2 = mysqli_real_escape_string($conn, $data["password2"]);
+
+//Cek username apakah sudah ada atau belum
+$query = "SELECT username FROM users WHERE username = '$username';";
+
+  $result = mysqli_query($conn, $query);
+
+if(mysqli_fetch_assoc($result)) {
+    echo "<script>
+        alert('Username Sudah Terdaftar!')
+        </script>";
+        return false;
+}
+
+// Cek Konfirmasi Password
+if($password !== $password2) {
+    echo "<script>
+            alert('Password Tidak Sesuai!');
+        </script>";
+        return false;
+    }
+
+//Enkripsi Password
+$password = password_hash($password, PASSWORD_DEFAULT);
+
+//Tambahkan User Baru
+mysqli_query($conn, "INSERT INTO users VALUES('', '$username', '$password')");
+    return mysqli_affected_rows($conn);
 
 }
 
