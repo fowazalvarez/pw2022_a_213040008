@@ -1,4 +1,11 @@
 <?php 
+session_start();
+
+if( !isset($_SESSION["login"])) {
+    header("Location: login.php");
+    exit;
+}
+
 require 'functions.php';
 
 // Ketika tombol di klik
@@ -52,14 +59,27 @@ $gambar   = "";
 </head>
 <!-- Navbar -->
 
-<ul class="nav nav-pills container">
-    <li class="nav-item">
-        <a class="nav-link" aria-current="page" href="index.php">Data Siswa</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link active" href="#">Tambah Data Siswa</a>
-    </li>
-</ul>
+<nav class="navbar navbar-expand-lg navbar-dar bg-dark">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link text-white" aria-current="page" href="index.php">Daftar Siswa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="coach.php">Daftar Coach</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="therapist.php">Daftar Therapist</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="logout.php">Log Out</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
 
 <!-- Akhir dari Navbar -->
 

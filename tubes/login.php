@@ -50,30 +50,30 @@ if(isset($_POST["login"])) {
 <body>
 
     <form action="" method="post">
+        <div class="top-wrapper">
+            <div id="contact" class="offset w-50 mx-auto mt-5 mb-5">
+                <div class="post-heading text-center">
+                    <h3 class="display-4 font-weight-bold">Log In</h3>
+                    <hr class="w-50 mx-auto mb-5" />
+                    <?php if (isset($error)) ; ?>
+                    <p style="color: red; font-style: italic;">Username / Password Salah !</p>
+                </div>
 
-        <div id="contact" class="offset w-50 mx-auto mt-5 mb-5">
-            <div class="post-heading text-center">
-                <h3 class="display-4 font-weight-bold">Log In</h3>
-                <hr class="w-50 mx-auto mb-5" />
-                <?php if (isset($error)) ; ?>
-                <p style="color: red; font-style: italic;">Username / Password Salah !</p>
+                <form action="">
+                    <div class="form-group mb-3">
+                        <label for="username">Username : </label>
+                        <input type="text" class="form-control" name="username" id="username" autocomplete="off" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="password">Password : </label>
+                        <input type="password" class="form-control" name="password" id="password" />
+                    </div>
+
+                    <button type="submit" class="btn mt-2 btn-primary" name="login">Login</button>
+                    <p class="login-register-text">Anda belum punya akun? <a href="registrasi.php">Register</a></p>
+                </form>
             </div>
-
-            <form action="">
-                <div class="form-group mb-3">
-                    <label for="username">Username : </label>
-                    <input type="text" class="form-control" name="username" id="username" autocomplete="off" />
-                </div>
-                <div class="form-group mb-3">
-                    <label for="password">Password : </label>
-                    <input type="password" class="form-control" name="password" id="password" />
-                </div>
-
-                <button type="submit" class="btn mt-2 btn-primary" name="login">Login</button>
-                <p class="login-register-text">Anda belum punya akun? <a href="registrasi.php">Register</a></p>
-            </form>
         </div>
-
     </form>
 
 </body>

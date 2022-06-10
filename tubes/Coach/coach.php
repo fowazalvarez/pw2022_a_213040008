@@ -8,17 +8,15 @@ if( !isset($_SESSION["login"])) {
 
 require 'functions.php';
 
-$siswa = query("SELECT * FROM siswa");
+$coach = query("SELECT * FROM coach");
 
 // Query siswa Ketika tombol cari diklik
 if(isset($_GET["cari"])) {
   $keyword = $_GET["keyword"];
-  $query = "SELECT * FROM siswa WHERE
+  $query = "SELECT * FROM coach WHERE
               nama LIKE '%$keyword%' OR
-              email LIKE '%$keyword%' OR
-              alamat LIKE '%$keyword%' OR
               program LIKE '%$keyword%'";
-  $siswa = query($query);
+  $coach = query($query);
 }
 ?>
 
@@ -49,10 +47,10 @@ if(isset($_GET["cari"])) {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link text-white" aria-current="page" href="#">Daftar Siswa</a>
+                        <a class="nav-link text-white" aria-current="page" href="../index.php">Daftar Siswa</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="Coach/coach.php">Daftar Coach</a>
+                        <a class="nav-link text-white" href="coach.php">Daftar Coach</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="therapist.php">Daftar Therapist</a>
@@ -74,8 +72,8 @@ if(isset($_GET["cari"])) {
     <!-- Akhir dari Navbar -->
 
     <div class="container">
-        <h1>Daftar Siswa Archery</h1>
-        <h4><a class="text-dark" href="tambah.php">Tambah Data Siswa</a></h4>
+        <h1>Daftar Archery Coach</h1>
+        <h4><a class="text-dark" href="tambahCoach.php">Tambah Data Coach</a></h4>
 
     </div>
 
@@ -85,15 +83,13 @@ if(isset($_GET["cari"])) {
                 <th>No.</th>
                 <th>Gambar</th>
                 <th>Nama</th>
-                <th>Email</th>
-                <th>Alamat</th>
-                <th>Program</th>
+                <th>Program Siswa</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
             <?php $no = 1; ?>
-            <?php foreach($siswa as $swa) {?>
+            <?php foreach($coach as $cah) {?>
             <tr class="align-middle">
                 <th scope="row"><?php echo $no++; ?></th>
 
@@ -101,8 +97,6 @@ if(isset($_GET["cari"])) {
                     <img src="img/<?= $swa["gambar"]?>" width="50" height="50" class="rounded-circle">
                 </td>
                 <td><?= $swa["nama"] ?></td>
-                <td><?= $swa["email"] ?></td>
-                <td><?= $swa["alamat"] ?></td>
                 <td><?= $swa["program"] ?></td>
                 <td>
                     <a href="edit.php?id=<?= $swa["id"]; ?>" class="btn badge bg-warning">Edit</a>
