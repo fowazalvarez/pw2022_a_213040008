@@ -1,11 +1,4 @@
 <?php
-session_start();
-
-if( !isset($_SESSION["login"])) {
-    header("Location: login.php");
-    exit;
-}
-
 require 'functions.php';
 
 if(isset($_POST["register"])) {
@@ -40,27 +33,32 @@ if(isset($_POST["register"])) {
 
 <body>
 
-    <h1>Halaman Regristrasi</h1>
-
     <form action="" method="POST">
 
-        <ul>
-            <li>
-                <label for="username">Username : </label>
-                <input type="text" name="username" id="username">
-            </li>
-            <li>
-                <label for="password">Password : </label>
-                <input type="password" name="password" id="password">
-            </li>
-            <li>
-                <label for="password2">Konfirmasi Password : </label>
-                <input type="password" name="password2" id="password2">
-            </li>
-            <li>
-                <button type="submit" name="register">Register!</button>
-            </li>
-        </ul>
+        <div id="contact" class="offset w-50 mx-auto mt-5 mb-5">
+            <div class="post-heading text-center">
+                <h3 class="display-4 font-weight-bold">Registrasi</h3>
+                <hr class="w-50 mx-auto mb-5" />
+            </div>
+
+            <form action="">
+                <div class="form-group mb-3">
+                    <label for="username">Username : </label>
+                    <input type="text" class="form-control" name="username" id="username" autocomplete="off" />
+                </div>
+                <div class="form-group mb-3">
+                    <label for="password">Password : </label>
+                    <input type="password" class="form-control" name="password" id="password" />
+                </div>
+                <div class="form-group mb-3">
+                    <label for="password2">Konfirmasi Password : </label>
+                    <input type="password" class="form-control" name="password2" id="password2" />
+                </div>
+
+                <button type="submit" class="btn mt-2 btn-primary" name="register">Register!</button>
+                <p class="login-register-text">Sudah punya akun? <a href="login.php">Sign In</a></p>
+            </form>
+        </div>
 
 
     </form>
