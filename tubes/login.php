@@ -1,4 +1,6 @@
 <?php 
+session_start();
+
 require 'functions.php';
 $conn = koneksi();
 
@@ -15,7 +17,10 @@ if(isset($_POST["login"])) {
         // Cek Password
         $row = mysqli_fetch_assoc($result);
         if (password_verify($password, $row["password"])) {
-            header("Location: login_success.php");
+            // Set Session
+            $_SESSION["login"] = true;
+
+            header("Location: index.php");
             exit;
         }
     }
@@ -54,7 +59,7 @@ if(isset($_POST["login"])) {
         <ul>
             <li>
                 <label for="username">Username :</label>
-                <input type="text" name="username" id="username">
+                <input type="text" name="username" id="username" autocomplete="off">
             </li>
             <li>
                 <label for="password">Password :</label>

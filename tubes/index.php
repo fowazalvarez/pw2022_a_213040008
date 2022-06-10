@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if( !isset($_SESSION["login"])) {
+    header("Location: login.php");
+    exit;
+}
+
 require 'functions.php';
 
 $siswa = query("SELECT * FROM siswa");
@@ -42,6 +49,9 @@ if(isset($_GET["cari"])) {
         </li>
         <li class="nav-item">
             <a class="nav-link" href="tambah.php">Tambah Data Siswa</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="logout.php">Log Out</a>
         </li>
     </ul>
     <!-- Akhir dari Navbar -->
