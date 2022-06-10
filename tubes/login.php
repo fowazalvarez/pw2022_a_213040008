@@ -1,12 +1,13 @@
 <?php 
 require 'functions.php';
+$conn = koneksi();
 
-if (isset($_POST["login"]) ) {
+if(isset($_POST["login"])) {
 
     $username = $_POST["username"];
     $password = $_POST["password"];
     
-    $result = mysqli_query($conn, "SELECT * FROM users WHERE username = 'username'");
+    $result = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username'");
 
     // Cek Username
     if(mysqli_num_rows($result) === 1) {
@@ -14,10 +15,12 @@ if (isset($_POST["login"]) ) {
         // Cek Password
         $row = mysqli_fetch_assoc($result);
         if (password_verify($password, $row["password"])) {
-            header("Location: index.php");
+            header("Location: login_success.php");
             exit;
         }
     }
+    
+    $error = true;
 }
 
 ?>
@@ -42,6 +45,9 @@ if (isset($_POST["login"]) ) {
 <body>
 
     <h1>Halaman Login</h1>
+
+    <?php if (isset($error)) ; ?>
+    <p style="color: red; font-style: italic;">Username / Password Salah !</p>
 
     <form action="" method="post">
 

@@ -1,12 +1,13 @@
 <?php 
 
-
+// Koneksi ke Database
 function koneksi() {
     $conn = mysqli_connect("localhost", "root", "", "pw2022_a_213040008") or die('koneksi gagal !');
 
     return $conn;
 }
 
+// Query
 function query($query) {
     $conn = koneksi();
     $result = mysqli_query($conn, $query)or die(mysqli_error($conn));
