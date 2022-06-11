@@ -89,7 +89,7 @@ if(isset($_GET["cari"])) {
 
     <div class="container">
         <h1>Daftar Siswa Archery</h1>
-        <h5><a class="text-dark" href="tambah.php">Tambah Data Siswa</a></h5>
+        <h5><a class="text-dark" href="tambah.php">Tambah Data Siswa</a></h5> | <a href="cetak.php">Cetak</a>
 
         <br><br>
 
