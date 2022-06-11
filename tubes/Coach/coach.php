@@ -56,7 +56,7 @@ if(isset($_GET["cari"])) {
                         <a class="nav-link text-white" href="therapist.php">Daftar Therapist</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="logout.php">Log Out</a>
+                        <a class="nav-link text-white" href="../logout.php">Log Out</a>
                     </li>
 
                 </ul>
