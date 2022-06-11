@@ -76,6 +76,14 @@ function ubah($data) {
     $nama = htmlspecialchars($data["nama"]);
     $program = htmlspecialchars($data["program"]);
     $gambar = htmlspecialchars($data["gambar"]);
+    $gambarLama = htmlspecialchars($data["gambarLama"]);
+
+    // Cek apakah user pilih gambar baru atau tidak
+    if($_FILES['gambar']['error'] === 4 ) {
+        $gambar = $gambarLama;
+    } else {
+        $gambar = upload();
+    }
 
     $query = "UPDATE coach SET
                 nama = '$nama',

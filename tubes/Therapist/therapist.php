@@ -1,6 +1,6 @@
 <?php
 
-require '../Coach/functions.php';
+require '../Therapist/functions.php';
 session_start();
 
 if( !isset($_SESSION["login"])) {
@@ -11,21 +11,21 @@ if( !isset($_SESSION["login"])) {
 // Pagination
 // Konfirgurasi
 $jumlahDataPerHalaman = 10;
-$jumlahDAta = count(query("SELECT * FROM coach"));
+$jumlahDAta = count(query("SELECT * FROM therapist"));
 $jumlahHalaman = ceil($jumlahDAta / $jumlahDataPerHalaman);
 $halamanAktif = ( isset ($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
 $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 
 
-$coach = query("SELECT * FROM coach LIMIT $awalData, $jumlahDataPerHalaman");
+$therapist = query("SELECT * FROM therapist LIMIT $awalData, $jumlahDataPerHalaman");
 
 // Query siswa Ketika tombol cari diklik
 if(isset($_GET["cari"])) {
   $keyword = $_GET["keyword"];
-  $query = "SELECT * FROM coach WHERE
+  $query = "SELECT * FROM therapist WHERE
               nama LIKE '%$keyword%' OR
               program LIKE '%$keyword%'";
-  $coach = query($query);
+  $therapist = query($query);
 }
 ?>
 
@@ -59,14 +59,14 @@ if(isset($_GET["cari"])) {
                         <a class="nav-link text-white" aria-current="page" href="../index.php">Daftar Siswa</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="coach.php">Daftar Coach</a>
+                        <a class="nav-link text-white" href="../Coach/coach.php">Daftar Coach</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="../Therapist/therapist.php">Daftar Therapist</a>
+                        <a class="nav-link text-white" href="#">Daftar Therapist</a>
                     </li>
 
-                </ul>
 
+                </ul>
                 <!-- Search bar -->
                 <form action="" class="d-flex" role="search" style="padding-right: 50px;">
                     <input class="form-control me-2 w-auto p-1 border border-light" type="text" name="keyword"
@@ -77,7 +77,7 @@ if(isset($_GET["cari"])) {
 
                 <ul class="navbar-nav mb-2 mb-lg-0 btn-outline-danger">
                     <li class="nav-item">
-                        <a class="nav-link text-white" style="justify-content: center;" href="../logout.php">Log Out</a>
+                        <a class="nav-link text-white" style="justify-content: center;" href=" logout.php">Log Out</a>
                     </li>
                 </ul>
             </div>
@@ -86,8 +86,8 @@ if(isset($_GET["cari"])) {
     <!-- Akhir dari Navbar -->
 
     <div class="container">
-        <h1>Daftar Coach Archery</h1>
-        <h5><a class="text-dark" href="../Coach/tambahCoach.php">Tambah Data Coach</a></h5>
+        <h1>Daftar Therapist</h1>
+        <h5><a class="text-dark" href="../Therapist/tambahTherapist.php">Tambah Data Therapist</a></h5>
 
         <br><br>
 
@@ -111,8 +111,6 @@ if(isset($_GET["cari"])) {
         <!-- <a href="?halaman=<? // $halamanAktif + 1; ?>">&raquo;</a> -->
         <?php // endif; ?>
 
-        <!-- Akhir dari Navigasi -->
-
     </div>
     <div id="container">
         <table class="table container">
@@ -121,24 +119,25 @@ if(isset($_GET["cari"])) {
                     <th>No.</th>
                     <th>Gambar</th>
                     <th>Nama</th>
-                    <th>Program Melatih</th>
+                    <th>Program Terapi</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $no = 1; ?>
-                <?php foreach($coach as $coh) {?>
+                <?php foreach($therapist as $trp) {?>
                 <tr class="align-middle">
                     <th scope="row"><?php echo $no++; ?></th>
 
                     <td>
-                        <img src="../Coach/img/<?= $coh["gambar"]?>" width="50" height="50" class="rounded-circle">
+                        <img src="../Therapist/img/<?= $trp["gambar"]?>" width="50" height="50" class="rounded-circle">
                     </td>
-                    <td><?= $coh["nama"] ?></td>
-                    <td><?= $coh["program"] ?></td>
+                    <td><?= $trp["nama"] ?></td>
+                    <td><?= $trp["program"] ?></td>
                     <td>
-                        <a href="../Coach/editCoach.php?id=<?= $coh["id"]; ?>" class="btn badge bg-warning">Edit</a>
-                        <a href="../Coach/deleteCoach.php?id=<?= $coh["id"]; ?>" class="btn badge bg-danger"
+                        <a href="../Therapist/editTherapist.php?id=<?= $trp["id"]; ?>"
+                            class="btn badge bg-warning">Edit</a>
+                        <a href="../Therapist/deleteTherapist.php?id=<?= $trp["id"]; ?>" class="btn badge bg-danger"
                             onclick="return confirm('Menghapus Data?');">Delete</a>
                     </td>
                 </tr>
@@ -159,7 +158,7 @@ if(isset($_GET["cari"])) {
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     -->
-    <script src="../js/coach.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>

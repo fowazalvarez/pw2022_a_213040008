@@ -6,13 +6,13 @@ if( !isset($_SESSION["login"])) {
     exit;
 }
 
-require '../Coach/functions.php';
+require '../Therapist/functions.php';
 
     // Mengambil Data di URL
     $id = $_GET["id"];
 
     // Query data Siswa berdasarkan ID
-    $coh = query("SELECT * FROM coach WHERE id = $id")[0];    
+    $trp = query("SELECT * FROM therapist WHERE id = $id")[0];    
 
 
     // Apakah data berhasil diubah atau tidak
@@ -21,14 +21,14 @@ if(isset($_POST["ubah"])) {
             echo "
                 <script>
                     alert('data berhasil diubah!');
-                    document.location.href = '../Coach/coach.php';
+                    document.location.href = '../Therapist/therapist.php';
                 </script>
             ";
         } else {
             echo "
             <script>
                 alert('data gagal diubah!');
-                document.location.href = '../Coach/coach.php';
+                document.location.href = './Therapist/therapist.php';
             </script>
         ";
         }
@@ -55,7 +55,7 @@ $gambar   = "";
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <title>Edit Data Siswa</title>
+    <title>Edit Data Therapist</title>
 </head>
 
 <body>
@@ -63,33 +63,33 @@ $gambar   = "";
     <!-- Navbar -->
     <ul class="nav nav-pills container">
         <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="../Coach/coach.php">Data Coach</a>
+            <a class="nav-link" aria-current="page" href="../Coach/coach.php">Data Therapist</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" href="#">Mengedit Data Coach</a>
+            <a class="nav-link active" href="#">Mengedit Data Therapist</a>
         </li>
     </ul>
 
     <!-- Akhir dari Navbar -->
 
     <div class="container">
-        <h1>Form Edit Data Coach</h1>
+        <h1>Form Edit Data Therapist</h1>
 
         <div class="row mt-3">
             <div class="col-5">
                 <form action="" method="POST" autocomplete="off" enctype="multipart/form-data">
-                    <input type="hidden" name="id" value="<?= $coh["id"];  ?>">
-                    <input type="hidden" name="gambarLama" value="<?= $coh["gambar"];  ?>">
+                    <input type="hidden" name="id" value="<?= $trp["id"];  ?>">
+                    <input type="hidden" name="gambarLama" value="<?= $trp["gambar"];  ?>">
                     <!-- Nama -->
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama : </label>
                         <input type="text" class="form-control" id="nama" name="nama" required
-                            value="<?= $coh["nama"]; ?>">
+                            value="<?= $trp["nama"]; ?>">
                     </div>
                     <!-- Program -->
                     <div class="mb-3">
                         <label for="email" class="form-label" required>Program : </label>
-                        <select class="form-control" name="program" id="program" value="<?= $coh["gambar"]; ?>">
+                        <select class="form-control" name="program" id="program" value="<?= $trp["gambar"]; ?>">
                             <option value="">- Pilih Program -</option>
                             <option value="3 bulan" <?php if($program == "3 bulan") echo "selected"?>>3 Bulan</option>
                             <option value="6 bulan" <?php if($program == "6 bulan") echo "selected"?>>6 Bulan</option>
@@ -100,7 +100,7 @@ $gambar   = "";
                     <!-- Gambar -->
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Gambar : </label>
-                        <img src="../Coach/img/<?= $coh['gambar']; ?>" width="50" height="50">
+                        <img src="../Coach/img/<?= $trp['gambar']; ?>" width="50" height="50">
                         <input type="file" class="form-control" id="gambar" name="gambar">
                     </div>
 

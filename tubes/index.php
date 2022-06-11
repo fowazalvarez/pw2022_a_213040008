@@ -64,19 +64,24 @@ if(isset($_GET["cari"])) {
                         <a class="nav-link text-white" href="Coach/coach.php">Daftar Coach</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="therapist.php">Daftar Therapist</a>
+                        <a class="nav-link text-white" href="Therapist/therapist.php">Daftar Therapist</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="logout.php">Log Out</a>
-                    </li>
+
 
                 </ul>
-
+                <!-- Search bar -->
                 <form action="" class="d-flex" role="search" style="padding-right: 50px;">
                     <input class="form-control me-2 w-auto p-1 border border-light" type="text" name="keyword"
                         id="keyword" autocomplete="off" placeholder="Ketik disini..." aria-label="Search" autofocus>
                     <button class="btn btn-outline-light" type="submit" id="tombol-cari" name="cari">Cari !</button>
                 </form>
+                <!-- Akhir dari Search bar -->
+
+                <ul class="navbar-nav mb-2 mb-lg-0 btn-outline-danger">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" style="justify-content: center;" href=" logout.php">Log Out</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>

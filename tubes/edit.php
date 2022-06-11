@@ -79,8 +79,9 @@ $gambar   = "";
 
         <div class="row mt-3">
             <div class="col-5">
-                <form action="" method="POST" autocomplete="off">
+                <form action="" method="POST" autocomplete="off" enctype="multipart/form-data">
                     <input type="hidden" name="id" value="<?= $swa["id"];  ?>">
+                    <input type="hidden" name="gambarLama" value="<?= $swa["gambar"];  ?>">
                     <!-- Nama -->
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama : </label>
@@ -113,9 +114,8 @@ $gambar   = "";
                     <!-- Gambar -->
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Gambar : </label>
+                        <img src="img/<?= $swa['gambar']; ?>">
                         <input type="file" class="form-control" id="gambar" name="gambar">
-                        <input type="hidden" class="form-control" id="gambarLama" name="gambarLama"
-                            value="<?= $swa["gambar"]; ?>">
                     </div>
 
                     <button type="submit" name="ubah" class="btn btn-primary">Ubah Data Siswa</button>

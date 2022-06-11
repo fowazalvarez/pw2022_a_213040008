@@ -1,0 +1,129 @@
+<?php 
+session_start();
+
+if( !isset($_SESSION["login"])) {
+    header("Location: login.php");
+    exit;
+}
+
+require 'functions.php';
+$conn = koneksi();
+
+// Ketika tombol di klik
+if(isset($_POST["tambah"])) {
+    // Jalankan fungsi tambah
+    if(isset($_POST["tambah"])) {
+  
+        // cek apakah data berhasil ditambahkan atau tidak
+        if(tambah($_POST) > 0) {
+            echo "
+                <script>
+                    alert('Data Berhasil Ditambahkan!');
+                    document.location.href = '../Therapist/therapist.php';
+                </script>
+            ";
+        } else {
+            echo "
+            <script>
+                alert('Data Gagal Ditambahkan!');
+                document.location.href = '../Therapist/therapist.php';
+            </script>
+        ";
+        }
+    
+    }
+}
+
+// Form pilihan
+$nama = "";
+$email = "";
+$alamat = "";
+$program  = "";
+$gambar   = "";
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Data</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+
+</head>
+<!-- Navbar -->
+
+<nav class="navbar navbar-expand-lg navbar-dar bg-dark">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 95px;">
+                <li class="nav-item">
+                    <a class="nav-link text-white" aria-current="page" href="index.php">Daftar Siswa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="Coach/coach.php">Daftar Coach</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="therapist.php">Daftar Therapist</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="logout.php">Log Out</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Akhir dari Navbar -->
+
+<div class="container">
+    <h1>Tambah Data Therapist</h1>
+
+    <div class="row mt-3">
+        <div class="col-5">
+            <form action="" method="POST" autocomplete="off" enctype="multipart/form-data">
+                <!-- Nama -->
+                <div class="mb-3">
+                    <label for="nama" class="form-label">Nama : </label>
+                    <input type="text" class="form-control" id="nama" name="nama" required>
+                </div>
+                <!-- Program -->
+                <div class="mb-3">
+                    <label for="program" class="form-label">Program : </label>
+                    <select class="form-control" name="program" id="program" required>
+                        <option value="">- Pilih Program -</option>
+                        <option value="3 bulan" <?php if($program == "3 bulan") echo "selected"?>>3 Bulan</option>
+                        <option value="6 bulan" <?php if($program == "6 bulan") echo "selected"?>>6 Bulan</option>
+                        <option value="12 bulan" <?php if($program == "12 bulan") echo "selected"?>>12 Bulan
+                        </option>
+                    </select>
+                </div>
+                <!-- Gambar -->
+                <div class="mb-3">
+                    <label for="gambar" class="form-label">Gambar : </label>
+                    <input type="file" class="form-control" id="gambar" name="gambar">
+                </div>
+
+                <!-- Tombol -->
+                <button type="submit" name="tambah" class="btn btn-primary">Tambah Data Therapist</button>
+            </form>
+
+
+        </div>
+    </div>
+
+</div>
+
+<body>
+
+</body>
+
+</html>

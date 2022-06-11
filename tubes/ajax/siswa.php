@@ -1,6 +1,7 @@
 <?php
 require '../functions.php';
 $conn = koneksi();
+
 $keyword = $_GET["keyword"];
 
 $query = "SELECT * FROM siswa WHERE
