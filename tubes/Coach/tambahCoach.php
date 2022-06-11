@@ -6,8 +6,7 @@ if( !isset($_SESSION["login"])) {
     exit;
 }
 
-require 'functions.php';
-$conn = koneksi();
+require '../Coach/functions.php';
 
 // Ketika tombol di klik
 if(isset($_POST["tambah"])) {
@@ -19,14 +18,14 @@ if(isset($_POST["tambah"])) {
             echo "
                 <script>
                     alert('Data Berhasil Ditambahkan!');
-                    document.location.href = 'index.php';
+                    document.location.href = '../Coach/coach.php';
                 </script>
             ";
         } else {
             echo "
             <script>
                 alert('Data Gagal Ditambahkan!');
-                document.location.href = 'index.php';
+                document.location.href = '../Coach/coach.php';
             </script>
         ";
         }
@@ -36,8 +35,6 @@ if(isset($_POST["tambah"])) {
 
 // Form pilihan
 $nama = "";
-$email = "";
-$alamat = "";
 $program  = "";
 $gambar   = "";
 ?>
@@ -65,16 +62,16 @@ $gambar   = "";
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 95px;">
                 <li class="nav-item">
-                    <a class="nav-link text-white" aria-current="page" href="index.php">Daftar Siswa</a>
+                    <a class="nav-link text-white" aria-current="page" href="../index.php">Daftar Siswa</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="Coach/coach.php">Daftar Coach</a>
+                    <a class="nav-link text-white" href="../Coach/coach.php">Daftar Coach</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="therapist.php">Daftar Therapist</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="logout.php">Log Out</a>
+                    <a class="nav-link text-white" href="../logout.php">Log Out</a>
                 </li>
 
             </ul>
@@ -85,7 +82,7 @@ $gambar   = "";
 <!-- Akhir dari Navbar -->
 
 <div class="container">
-    <h1>Tambah Data Siswa</h1>
+    <h1>Tambah Data Coach</h1>
 
     <div class="row mt-3">
         <div class="col-5">
@@ -95,19 +92,9 @@ $gambar   = "";
                     <label for="nama" class="form-label">Nama : </label>
                     <input type="text" class="form-control" id="nama" name="nama" required>
                 </div>
-                <!-- Email -->
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email :</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                </div>
-                <!-- Alamat -->
-                <div class="mb-3">
-                    <label for="alamat" class="form-label">Alamat : </label>
-                    <input type="text" class="form-control" id="alamat" name="alamat" required>
-                </div>
                 <!-- Program -->
                 <div class="mb-3">
-                    <label for="program" class="form-label">Program : </label>
+                    <label for="program" class="form-label">Program Mengajar : </label>
                     <select class="form-control" name="program" id="program" required>
                         <option value="">- Pilih Program -</option>
                         <option value="3 bulan" <?php if($program == "3 bulan") echo "selected"?>>3 Bulan</option>
@@ -123,7 +110,7 @@ $gambar   = "";
                 </div>
 
                 <!-- Tombol -->
-                <button type="submit" name="tambah" class="btn btn-primary">Tambah Data Siswa</button>
+                <button type="submit" name="tambah" class="btn btn-primary">Tambah Data Coach</button>
             </form>
 
 

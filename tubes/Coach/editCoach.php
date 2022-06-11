@@ -6,13 +6,13 @@ if( !isset($_SESSION["login"])) {
     exit;
 }
 
-require 'functions.php';
+require '../Coach/functions.php';
 
     // Mengambil Data di URL
     $id = $_GET["id"];
 
     // Query data Siswa berdasarkan ID
-    $swa = query("SELECT * FROM siswa WHERE id = $id")[0];    
+    $coh = query("SELECT * FROM coach WHERE id = $id")[0];    
 
 
     // Apakah data berhasil diubah atau tidak
@@ -21,14 +21,14 @@ if(isset($_POST["ubah"])) {
             echo "
                 <script>
                     alert('data berhasil diubah!');
-                    document.location.href = 'index.php';
+                    document.location.href = '../Coach/coach.php';
                 </script>
             ";
         } else {
             echo "
             <script>
                 alert('data gagal diubah!');
-                document.location.href = 'index.php';
+                document.location.href = '../Coach/coach.php';
             </script>
         ";
         }
@@ -38,8 +38,6 @@ if(isset($_POST["ubah"])) {
 
 // Form pilihan
 $nama = "";
-$email = "";
-$alamat = "";
 $program  = "";
 $gambar   = "";
 
@@ -65,44 +63,32 @@ $gambar   = "";
     <!-- Navbar -->
     <ul class="nav nav-pills container">
         <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="index.php">Data Siswa</a>
+            <a class="nav-link" aria-current="page" href="../Coach/coach.php">Data Coach</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" href="#">Mengedit Data Siswa</a>
+            <a class="nav-link active" href="#">Mengedit Data Coach</a>
         </li>
     </ul>
 
     <!-- Akhir dari Navbar -->
 
     <div class="container">
-        <h1>Form Edit Data Siswa</h1>
+        <h1>Form Edit Data Coach</h1>
 
         <div class="row mt-3">
             <div class="col-5">
                 <form action="" method="POST" autocomplete="off">
-                    <input type="hidden" name="id" value="<?= $swa["id"];  ?>">
+                    <input type="hidden" name="id" value="<?= $coh["id"];  ?>">
                     <!-- Nama -->
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama : </label>
                         <input type="text" class="form-control" id="nama" name="nama" required
-                            value="<?= $swa["nama"]; ?>">
-                    </div>
-                    <!-- Email -->
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email : </label>
-                        <input type="email" class="form-control" id="email" name="email" required
-                            value="<?= $swa["email"]; ?>">
-                    </div>
-                    <!-- Alamat -->
-                    <div class="mb-3">
-                        <label for="alamat" class="form-label">Alamat : </label>
-                        <input type="text" class="form-control" id="alamat" name="alamat" required
-                            value="<?= $swa["alamat"]; ?>">
+                            value="<?= $coh["nama"]; ?>">
                     </div>
                     <!-- Program -->
                     <div class="mb-3">
-                        <label for="program" class="form-label" required>Program : </label>
-                        <select class="form-control" name="program" id="program" value="<?= $swa["program"]; ?>">
+                        <label for="email" class="form-label" required>Program : </label>
+                        <select class="form-control" name="program" id="program" value="<?= $coh["gambar"]; ?>">
                             <option value="">- Pilih Program -</option>
                             <option value="3 bulan" <?php if($program == "3 bulan") echo "selected"?>>3 Bulan</option>
                             <option value="6 bulan" <?php if($program == "6 bulan") echo "selected"?>>6 Bulan</option>
@@ -113,12 +99,11 @@ $gambar   = "";
                     <!-- Gambar -->
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Gambar : </label>
-                        <input type="file" class="form-control" id="gambar" name="gambar">
-                        <input type="hidden" class="form-control" id="gambarLama" name="gambarLama"
-                            value="<?= $swa["gambar"]; ?>">
+                        <input type="file" class="form-control" id="gambar" name="gambar"
+                            value="<?= $coh["gambar"]; ?>">
                     </div>
 
-                    <button type="submit" name="ubah" class="btn btn-primary">Ubah Data Siswa</button>
+                    <button type="submit" name="ubah" class="btn btn-primary">Ubah Data Coach</button>
                 </form>
 
 

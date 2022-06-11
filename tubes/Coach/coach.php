@@ -1,4 +1,6 @@
 <?php
+
+require '../Coach/functions.php';
 session_start();
 
 if( !isset($_SESSION["login"])) {
@@ -6,9 +8,16 @@ if( !isset($_SESSION["login"])) {
     exit;
 }
 
-require 'functions.php';
+// Pagination
+// Konfirgurasi
+$jumlahDataPerHalaman = 10;
+$jumlahDAta = count(query("SELECT * FROM coach"));
+$jumlahHalaman = ceil($jumlahDAta / $jumlahDataPerHalaman);
+$halamanAktif = ( isset ($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
+$awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 
-$coach = query("SELECT * FROM coach");
+
+$coach = query("SELECT * FROM coach LIMIT $awalData, $jumlahDataPerHalaman");
 
 // Query siswa Ketika tombol cari diklik
 if(isset($_GET["cari"])) {
@@ -16,7 +25,7 @@ if(isset($_GET["cari"])) {
   $query = "SELECT * FROM coach WHERE
               nama LIKE '%$keyword%' OR
               program LIKE '%$keyword%'";
-  $coach = query($query);
+  $siswa = query($query);
 }
 ?>
 
@@ -42,10 +51,10 @@ if(isset($_GET["cari"])) {
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dar bg-dark">
+    <nav class="navbar navbar-expand-xl navbar-dar bg-dark">
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 95px;">
                     <li class="nav-item">
                         <a class="nav-link text-white" aria-current="page" href="../index.php">Daftar Siswa</a>
                     </li>
@@ -61,10 +70,10 @@ if(isset($_GET["cari"])) {
 
                 </ul>
 
-                <form class="d-flex" role="search">
+                <form action="" class="d-flex" role="search" style="padding-right: 50px;">
                     <input class="form-control me-2 w-auto p-1 border border-light" type="text" name="keyword"
                         id="keyword" autocomplete="off" placeholder="Ketik disini..." aria-label="Search" autofocus>
-                    <button class="btn btn-outline-light" type="submit" id="cari" name="cari">Cari !</button>
+                    <button class="btn btn-outline-light" type="submit" id="tombol-cari" name="cari">Cari !</button>
                 </form>
             </div>
         </div>
@@ -72,43 +81,66 @@ if(isset($_GET["cari"])) {
     <!-- Akhir dari Navbar -->
 
     <div class="container">
-        <h1>Daftar Archery Coach</h1>
-        <h4><a class="text-dark" href="tambahCoach.php">Tambah Data Coach</a></h4>
+        <h1>Daftar Coach Archery</h1>
+        <h5><a class="text-dark" href="../Coach/tambahCoach.php">Tambah Data Coach</a></h5>
+
+        <br><br>
+
+
+
+        <!-- Navigasi -->
+
+        <?php // if( $halamanAktif > 1 ) : ?>
+        <!-- <a href="?halaman=<? // $halamanAktif - 1; ?>">&laquo;</a> -->
+        <?php // endif; ?>
+
+        <?php for($i = 1; $i <= $jumlahHalaman; $i++) : ?>
+        <?php if( $i == $halamanAktif) : ?>
+        <a href="?halaman=<?= $i; ?>" style="font-weight: bold; color: black;"><?= $i; ?></a>
+        <?php else: ?>
+        <a href="?halaman=<?= $i; ?>"><?= $i; ?></a>
+        <?php endif; ?>
+        <?php endfor; ?>
+
+        <?php // if( $halamanAktif < $jumlahHalaman ) : ?>
+        <!-- <a href="?halaman=<? // $halamanAktif + 1; ?>">&raquo;</a> -->
+        <?php // endif; ?>
+
+        <!-- Akhir dari Navigasi -->
 
     </div>
+    <div id="container">
+        <table class="table container">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Gambar</th>
+                    <th>Nama</th>
+                    <th>Program Melatih</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $no = 1; ?>
+                <?php foreach($coach as $coh) {?>
+                <tr class="align-middle">
+                    <th scope="row"><?php echo $no++; ?></th>
 
-    <table class="table container">
-        <thead>
-            <tr>
-                <th>No.</th>
-                <th>Gambar</th>
-                <th>Nama</th>
-                <th>Program Siswa</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php $no = 1; ?>
-            <?php foreach($coach as $cah) {?>
-            <tr class="align-middle">
-                <th scope="row"><?php echo $no++; ?></th>
-
-                <td>
-                    <img src="img/<?= $swa["gambar"]?>" width="50" height="50" class="rounded-circle">
-                </td>
-                <td><?= $swa["nama"] ?></td>
-                <td><?= $swa["program"] ?></td>
-                <td>
-                    <a href="edit.php?id=<?= $swa["id"]; ?>" class="btn badge bg-warning">Edit</a>
-                    <a href="delete.php?id=<?= $swa["id"]; ?>" class="btn badge bg-danger"
-                        onclick="return confirm('Menghapus Data?');">Delete</a>
-                </td>
-            </tr>
-            <?php  }  ?>
-        </tbody>
-    </table>
+                    <td>
+                        <img src="../Coach/img/<?= $coh["gambar"]?>" width="50" height="50" class="rounded-circle">
+                    </td>
+                    <td><?= $coh["nama"] ?></td>
+                    <td><?= $coh["program"] ?></td>
+                    <td>
+                        <a href="../Coach/editCoach.php?id=<?= $coh["id"]; ?>" class="btn badge bg-warning">Edit</a>
+                        <a href="../Coach/deleteCoach.php?id=<?= $coh["id"]; ?>" class="btn badge bg-danger"
+                            onclick="return confirm('Menghapus Data?');">Delete</a>
+                    </td>
+                </tr>
+                <?php  }  ?>
+            </tbody>
+        </table>
     </div>
-
 
     <!-- Optional JavaScript; choose one of the two! -->
 
@@ -122,7 +154,7 @@ if(isset($_GET["cari"])) {
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     -->
-    <script src="search.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>

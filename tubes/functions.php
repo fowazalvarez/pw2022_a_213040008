@@ -79,8 +79,19 @@ function ubah($data) {
     $email = htmlspecialchars($data["email"]);
     $alamat = htmlspecialchars($data["alamat"]);
     $program = htmlspecialchars($data["program"]);
-    $gambar = htmlspecialchars($data["gambar"]);
+    $gambar = upload();
 
+    // Update Gambar
+    $gambarLama = htmlspecialchars($data["gambarLama"]);
+
+  if (!$gambar) {
+    return false;
+  }
+
+  if ($gambar == 'noimg.jpg') {
+    $gambar = $gambarLama;
+  }
+  
     $query = "UPDATE siswa SET
                 nama = '$nama',
                 email = '$email',
@@ -90,6 +101,8 @@ function ubah($data) {
                 WHERE id = $id
     
     ";
+
+
 
     mysqli_query($conn, $query) or die (mysqli_error($conn));
 

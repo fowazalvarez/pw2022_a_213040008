@@ -53,10 +53,10 @@ if(isset($_GET["cari"])) {
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dar bg-dark">
+    <nav class="navbar navbar-expand-xl navbar-dar bg-dark">
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 95px;">
                     <li class="nav-item">
                         <a class="nav-link text-white" aria-current="page" href="#">Daftar Siswa</a>
                     </li>
@@ -72,7 +72,7 @@ if(isset($_GET["cari"])) {
 
                 </ul>
 
-                <form action="" class="d-flex" role="search">
+                <form action="" class="d-flex" role="search" style="padding-right: 50px;">
                     <input class="form-control me-2 w-auto p-1 border border-light" type="text" name="keyword"
                         id="keyword" autocomplete="off" placeholder="Ketik disini..." aria-label="Search" autofocus>
                     <button class="btn btn-outline-light" type="submit" id="tombol-cari" name="cari">Cari !</button>
