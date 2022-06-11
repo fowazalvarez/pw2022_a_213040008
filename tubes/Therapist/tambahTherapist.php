@@ -65,16 +65,13 @@ $gambar   = "";
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left: 95px;">
                 <li class="nav-item">
-                    <a class="nav-link text-white" aria-current="page" href="index.php">Daftar Siswa</a>
+                    <a class="nav-link text-white" aria-current="page" href="../index.php">Daftar Siswa</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="Coach/coach.php">Daftar Coach</a>
+                    <a class="nav-link text-white" href="../Coach/coach.php">Daftar Coach</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="therapist.php">Daftar Therapist</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="logout.php">Log Out</a>
+                    <a class="nav-link text-white" href="../Therapist/therapist.php">Daftar Therapist</a>
                 </li>
 
             </ul>

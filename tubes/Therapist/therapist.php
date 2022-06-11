@@ -77,7 +77,7 @@ if(isset($_GET["cari"])) {
 
                 <ul class="navbar-nav mb-2 mb-lg-0 btn-outline-danger">
                     <li class="nav-item">
-                        <a class="nav-link text-white" style="justify-content: center;" href=" logout.php">Log Out</a>
+                        <a class="nav-link text-white" style="justify-content: center;" href="../logout.php">Log Out</a>
                     </li>
                 </ul>
             </div>
