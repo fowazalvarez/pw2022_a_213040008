@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2022 at 02:02 PM
+-- Generation Time: Jun 14, 2022 at 05:55 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `pw2022_a_213040008`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `coach`
+--
+
+CREATE TABLE `coach` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `program` varchar(100) NOT NULL,
+  `gambar` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `coach`
+--
+
+INSERT INTO `coach` (`id`, `nama`, `program`, `gambar`) VALUES
+(2, 'Fowaz Amran Alfarez', '12 bulan', '62a43897796c71413953282545.jpg'),
+(3, 'Linda Yulianti', '3 bulan', '62a461a1bb17ea3MVVXXA_700w_0.jpg'),
+(4, 'Kim Hyun Tak', '6 bulan', '62a4624e5cda3about.jpg');
 
 -- --------------------------------------------------------
 
@@ -56,6 +78,27 @@ INSERT INTO `siswa` (`id`, `nama`, `email`, `alamat`, `program`, `gambar`) VALUE
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `therapist`
+--
+
+CREATE TABLE `therapist` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `program` varchar(100) NOT NULL,
+  `gambar` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `therapist`
+--
+
+INSERT INTO `therapist` (`id`, `nama`, `program`, `gambar`) VALUES
+(1, 'Dr. Kristi', '12 bulan', '62a46c0f12ef3dr2.jpg'),
+(2, 'Dr. Richard', '3 bulan', '62a46e804c208dr1.jpg');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -72,16 +115,29 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `password`) VALUES
 (1, 'admin', '$2y$10$A48df/7zVCvtP1ndcZ2JdOzCLNJ6.cAkLXHTJ4pqyFenvMGxqFwxq'),
 (2, 'alvarez', '$2y$10$rr8M2yCrNbj2DBj5Ztx5Ze5pa/4qf4hX80nGXs5HsNGPzVLJkUnea'),
-(3, 'fowaz', '$2y$10$mXxKCb/Uwt/YbgVoccRN8ecjNz1Ywb3dG25XsMFBq.uV02BDjBCXK');
+(3, 'fowaz', '$2y$10$mXxKCb/Uwt/YbgVoccRN8ecjNz1Ywb3dG25XsMFBq.uV02BDjBCXK'),
+(9, 'admin1', '$2y$10$FW/rIvkWKJwyw8dDXQsw2O50Ot4taK3k0r67bP7Ba2dSYQ3wJIvrq');
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indexes for table `coach`
+--
+ALTER TABLE `coach`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `siswa`
 --
 ALTER TABLE `siswa`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `therapist`
+--
+ALTER TABLE `therapist`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -95,16 +151,28 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `coach`
+--
+ALTER TABLE `coach`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `therapist`
+--
+ALTER TABLE `therapist`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
